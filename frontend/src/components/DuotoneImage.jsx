@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default function DuotoneImage({ src, alt, className = '', style = {}, applyDuotone = true }) {
-  const fallbackUrl = 'https://images.unsplash.com/photo-1509631179647-0177331693ae?q=80&w=1000&auto=format&fit=crop';
+  const fallbackUrl = 'https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=800&q=80';
   const imageSrc = src && src.length ? src : fallbackUrl;
 
   return (
@@ -11,6 +11,7 @@ export default function DuotoneImage({ src, alt, className = '', style = {}, app
       className={`img-fluid ${applyDuotone ? 'xo-duotone-img' : ''} ${className}`}
       style={{
         objectFit: 'cover',
+        display: 'block',
         ...style
       }}
       onError={(e) => {

@@ -4,42 +4,42 @@ export const FALLBACK_CATEGORIES = [
     name: 'Hoodies & Sweats',
     slug: 'hoodies',
     description: 'Heavyweight French terry & fleece silhouettes with raw edges, metal hardware, and distressed embroidery.',
-    image: 'https://images.unsplash.com/photo-1556905055-8f358a7a47b2?q=80&w=1000&auto=format&fit=crop'
+    image: 'https://images.unsplash.com/photo-1556905055-8f358a7a47b2?auto=format&fit=crop&w=800&q=80'
   },
   {
     _id: 'cat-2',
     name: 'Tees & Tops',
     slug: 'tees',
     description: 'Ultra-heavy 280GSM organic cotton garments featuring hand-screenprinted occult typography and drop shoulders.',
-    image: 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=1000&auto=format&fit=crop'
+    image: 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=800&q=80'
   },
   {
     _id: 'cat-3',
     name: 'Outerwear & Leather',
     slug: 'outerwear',
     description: 'Full-grain lambskin, tailored trench coats, and bonded technical parkas built for cold urban darkness.',
-    image: 'https://images.unsplash.com/photo-1548883354-7622d03aca27?q=80&w=1000&auto=format&fit=crop'
+    image: 'https://images.unsplash.com/photo-1548883354-7622d03aca27?auto=format&fit=crop&w=800&q=80'
   },
   {
     _id: 'cat-4',
     name: 'Bottoms & Cargo',
     slug: 'bottoms',
     description: 'Multi-pocket modular cargo trousers, waxed Japanese denim, and elongated drawcord sweatpants.',
-    image: 'https://images.unsplash.com/photo-1517445312882-bc9910d016b7?q=80&w=1000&auto=format&fit=crop'
+    image: 'https://images.unsplash.com/photo-1517445312882-bc9910d016b7?auto=format&fit=crop&w=800&q=80'
   },
   {
     _id: 'cat-5',
     name: 'Accessories & Hardware',
     slug: 'accessories',
     description: 'Sterling silver chain links, full-grain leather harnesses, studded belts, and embroidered balaclavas.',
-    image: 'https://images.unsplash.com/photo-1611591475281-9199d99723ec?q=80&w=1000&auto=format&fit=crop'
+    image: 'https://images.unsplash.com/photo-1611591475281-9199d99723ec?auto=format&fit=crop&w=800&q=80'
   },
   {
     _id: 'cat-6',
     name: 'Limited Drops',
     slug: 'limited-drops',
     description: 'Numbered run items available exclusively in micro-quantities. Once sold out, never reproduced.',
-    image: 'https://images.unsplash.com/photo-1509631179647-0177331693ae?q=80&w=1000&auto=format&fit=crop'
+    image: 'https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=800&q=80'
   }
 ];
 
@@ -52,7 +52,7 @@ export const FALLBACK_PRODUCTS = [
     price: 320,
     compareAtPrice: 380,
     category: { _id: 'cat-1', name: 'Hoodies & Sweats', slug: 'hoodies' },
-    images: ['https://images.unsplash.com/photo-1556905055-8f358a7a47b2?q=80&w=1000&auto=format&fit=crop'],
+    images: ['https://images.unsplash.com/photo-1556905055-8f358a7a47b2?auto=format&fit=crop&w=800&q=80'],
     sizes: [{ size: 'S', stock: 8 }, { size: 'M', stock: 12 }, { size: 'L', stock: 10 }, { size: 'XL', stock: 4 }],
     colorway: 'Obsidian Black / Blood Crimson',
     isLimitedEdition: false,
@@ -67,7 +67,7 @@ export const FALLBACK_PRODUCTS = [
     price: 340,
     compareAtPrice: 0,
     category: { _id: 'cat-1', name: 'Hoodies & Sweats', slug: 'hoodies' },
-    images: ['https://images.unsplash.com/photo-1578587018452-892bacefd3f2?q=80&w=1000&auto=format&fit=crop'],
+    images: ['https://images.unsplash.com/photo-1578587018452-892bacefd3f2?auto=format&fit=crop&w=800&q=80'],
     sizes: [{ size: 'S', stock: 5 }, { size: 'M', stock: 8 }, { size: 'L', stock: 6 }, { size: 'XL', stock: 2 }],
     colorway: 'Pitch Black',
     isLimitedEdition: false,
@@ -82,7 +82,7 @@ export const FALLBACK_PRODUCTS = [
     price: 140,
     compareAtPrice: 165,
     category: { _id: 'cat-2', name: 'Tees & Tops', slug: 'tees' },
-    images: ['https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=1000&auto=format&fit=crop'],
+    images: ['https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=800&q=80'],
     sizes: [{ size: 'S', stock: 15 }, { size: 'M', stock: 20 }, { size: 'L', stock: 18 }, { size: 'XL', stock: 8 }],
     colorway: 'Vintage Black',
     isLimitedEdition: false,
@@ -97,7 +97,7 @@ export const FALLBACK_PRODUCTS = [
     price: 1450,
     compareAtPrice: 1750,
     category: { _id: 'cat-3', name: 'Outerwear & Leather', slug: 'outerwear' },
-    images: ['https://images.unsplash.com/photo-1551028719-00167b16eac5?q=80&w=1000&auto=format&fit=crop'],
+    images: ['https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=800&q=80'],
     sizes: [{ size: 'S', stock: 2 }, { size: 'M', stock: 4 }, { size: 'L', stock: 3 }, { size: 'XL', stock: 1 }],
     colorway: 'Full Black / Crimson Lining',
     isLimitedEdition: false,
@@ -112,7 +112,7 @@ export const FALLBACK_PRODUCTS = [
     price: 340,
     compareAtPrice: 390,
     category: { _id: 'cat-4', name: 'Bottoms & Cargo', slug: 'bottoms' },
-    images: ['https://images.unsplash.com/photo-1517445312882-bc9910d016b7?q=80&w=1000&auto=format&fit=crop'],
+    images: ['https://images.unsplash.com/photo-1517445312882-bc9910d016b7?auto=format&fit=crop&w=800&q=80'],
     sizes: [{ size: 'S', stock: 7 }, { size: 'M', stock: 12 }, { size: 'L', stock: 9 }, { size: 'XL', stock: 4 }],
     colorway: 'Jet Black Twill',
     isLimitedEdition: false,
@@ -127,7 +127,7 @@ export const FALLBACK_PRODUCTS = [
     price: 490,
     compareAtPrice: 580,
     category: { _id: 'cat-5', name: 'Accessories & Hardware', slug: 'accessories' },
-    images: ['https://images.unsplash.com/photo-1611591475281-9199d99723ec?q=80&w=1000&auto=format&fit=crop'],
+    images: ['https://images.unsplash.com/photo-1611591475281-9199d99723ec?auto=format&fit=crop&w=800&q=80'],
     sizes: [{ size: 'ONE SIZE', stock: 15 }],
     colorway: 'Oxidized Silver',
     isLimitedEdition: false,
@@ -142,7 +142,7 @@ export const FALLBACK_PRODUCTS = [
     price: 2150,
     compareAtPrice: 2600,
     category: { _id: 'cat-6', name: 'Limited Drops', slug: 'limited-drops' },
-    images: ['https://images.unsplash.com/photo-1509631179647-0177331693ae?q=80&w=1000&auto=format&fit=crop'],
+    images: ['https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=800&q=80'],
     sizes: [{ size: 'S', stock: 2 }, { size: 'M', stock: 3 }, { size: 'L', stock: 2 }],
     colorway: 'Aged Black / Blood Stain',
     isLimitedEdition: true,
@@ -157,7 +157,7 @@ export const FALLBACK_PRODUCTS = [
     price: 890,
     compareAtPrice: 1050,
     category: { _id: 'cat-3', name: 'Outerwear & Leather', slug: 'outerwear' },
-    images: ['https://images.unsplash.com/photo-1548883354-7622d03aca27?q=80&w=1000&auto=format&fit=crop'],
+    images: ['https://images.unsplash.com/photo-1548883354-7622d03aca27?auto=format&fit=crop&w=800&q=80'],
     sizes: [{ size: 'S', stock: 3 }, { size: 'M', stock: 5 }, { size: 'L', stock: 4 }],
     colorway: 'Pitch Black Wool',
     isLimitedEdition: false,

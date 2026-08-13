@@ -125,14 +125,15 @@ h1, h2, h3, h4, h5, h6, .xo-font-heading {
   color: var(--xo-text-bright);
 }
 
-/* Duotone image styling helper */
+/* High-contrast dark luxury image filter with smooth hover reveal */
 .xo-duotone-img {
-  filter: url(#xo-gothic-duotone);
-  transition: filter 0.4s ease;
+  filter: grayscale(80%) contrast(115%) brightness(95%);
+  transition: filter 0.35s ease, transform 0.35s ease;
 }
 
 .xo-duotone-img:hover {
-  filter: none;
+  filter: grayscale(0%) contrast(100%) brightness(100%);
+  transform: scale(1.04);
 }
 
 /* Badge styling */
