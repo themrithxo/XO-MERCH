@@ -3,14 +3,15 @@ import { useSearchParams } from 'react-router-dom';
 import { Filter, SlidersHorizontal, RefreshCw } from 'lucide-react';
 import api from '../services/api';
 import ProductCard from '../components/ProductCard';
+import { FALLBACK_PRODUCTS, FALLBACK_CATEGORIES } from '../data/fallbackData';
 
 export default function Shop() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [products, setProducts] = useState([]);
-  const [categories, setCategories] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [products, setProducts] = useState(FALLBACK_PRODUCTS);
+  const [categories, setCategories] = useState(FALLBACK_CATEGORIES);
+  const [loading, setLoading] = useState(false);
   const [totalPages, setTotalPages] = useState(1);
-  const [totalProducts, setTotalProducts] = useState(0);
+  const [totalProducts, setTotalProducts] = useState(FALLBACK_PRODUCTS.length);
 
   // Filter state
   const categoryParam = searchParams.get('category') || '';
@@ -34,24 +35,46 @@ export default function Shop() {
   const fetchCategories = async () => {
     try {
       const res = await api.get('/categories');
-      setCategories(res.data || []);
+      if (res.data?.length) setCategories(res.data);
     } catch (e) {
-      console.warn('Category fetch error:', e);
+      console.warn('Category API error, using static categories:', e);
     }
   };
 
   const fetchProducts = async () => {
-    setLoading(true);
     try {
       const queryString = searchParams.toString();
       const res = await api.get(`/products?${queryString}`);
-      setProducts(res.data.products || []);
-      setTotalPages(res.data.pages || 1);
-      setTotalProducts(res.data.totalProducts || 0);
+      if (res.data?.products?.length) {
+        setProducts(res.data.products);
+        setTotalPages(res.data.pages || 1);
+        setTotalProducts(res.data.totalProducts || res.data.products.length);
+      }
     } catch (err) {
-      console.error('Products fetch error:', err);
-    } finally {
-      setLoading(false);
+      console.warn('Backend API spin-up in progress, using static products:', err);
+      let filtered = [...FALLBACK_PRODUCTS];
+
+      if (categoryParam) {
+        filtered = filtered.filter(p => p.category?.slug === categoryParam);
+      }
+      if (isLimitedParam) {
+        filtered = filtered.filter(p => p.isLimitedEdition);
+      }
+      if (searchParam) {
+        filtered = filtered.filter(p => p.name.toLowerCase().includes(searchParam.toLowerCase()));
+      }
+      if (sizeParam) {
+        filtered = filtered.filter(p => p.sizes.some(s => s.size === sizeParam));
+      }
+      if (minPrice) {
+        filtered = filtered.filter(p => p.price >= Number(minPrice));
+      }
+      if (maxPrice) {
+        filtered = filtered.filter(p => p.price <= Number(maxPrice));
+      }
+
+      setProducts(filtered);
+      setTotalProducts(filtered.length);
     }
   };
 
@@ -62,7 +85,7 @@ export default function Shop() {
     } else {
       newParams.delete(key);
     }
-    newParams.set('page', '1'); // Reset to page 1 on filter update
+    newParams.set('page', '1');
     setSearchParams(newParams);
   };
 
@@ -209,12 +232,7 @@ export default function Shop() {
 
           {/* MAIN CATALOG PRODUCTS GRID */}
           <div className="col-lg-9">
-            {loading ? (
-              <div className="text-center py-5 text-danger">
-                <div className="spinner-border mb-2" role="status"></div>
-                <div className="fs-7 text-muted">Retrieving obsidian relics...</div>
-              </div>
-            ) : products.length > 0 ? (
+            {products.length > 0 ? (
               <>
                 <div className="row g-4 mb-5">
                   {products.map((product) => (

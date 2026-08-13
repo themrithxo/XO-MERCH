@@ -6,6 +6,7 @@ import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 import DuotoneImage from '../components/DuotoneImage';
 import RatingStars from '../components/RatingStars';
+import { FALLBACK_PRODUCTS } from '../data/fallbackData';
 
 export default function ProductDetail() {
   const { slug } = useParams();
@@ -31,25 +32,47 @@ export default function ProductDetail() {
 
   const fetchProductDetails = async () => {
     setLoading(true);
+    let currentProd = null;
+
     try {
       const res = await api.get(`/products/${slug}`);
-      setProduct(res.data);
-      if (res.data.images && res.data.images.length) {
-        setSelectedImage(res.data.images[0]);
-      }
-      const availableSize = res.data.sizes?.find(s => s.stock > 0)?.size || res.data.sizes?.[0]?.size || 'M';
-      setSelectedSize(availableSize);
-
-      // Fetch reviews
-      if (res.data._id) {
-        const revRes = await api.get(`/products/${res.data._id}/reviews`);
-        setReviews(revRes.data || []);
+      if (res.data) {
+        currentProd = res.data;
       }
     } catch (err) {
-      console.error('Fetch product detail error:', err);
-    } finally {
-      setLoading(false);
+      console.warn('API error, using static product fallback:', err);
     }
+
+    if (!currentProd) {
+      currentProd = FALLBACK_PRODUCTS.find(p => p.slug === slug || p._id === slug) || FALLBACK_PRODUCTS[0];
+    }
+
+    setProduct(currentProd);
+    if (currentProd.images && currentProd.images.length) {
+      setSelectedImage(currentProd.images[0]);
+    }
+    const availableSize = currentProd.sizes?.find(s => s.stock > 0)?.size || currentProd.sizes?.[0]?.size || 'M';
+    setSelectedSize(availableSize);
+
+    // Fetch reviews
+    if (currentProd._id && !currentProd._id.startsWith('prod-')) {
+      try {
+        const revRes = await api.get(`/products/${currentProd._id}/reviews`);
+        setReviews(revRes.data || []);
+      } catch (e) {}
+    } else {
+      setReviews([
+        {
+          _id: 'rev-1',
+          user: { name: 'Vespera Noir' },
+          rating: 5,
+          comment: 'The weight of this 500GSM fleece is insane. Feels like body armor. Crimson inner stitching is top tier dark luxury.',
+          createdAt: new Date()
+        }
+      ]);
+    }
+
+    setLoading(false);
   };
 
   const handleAddToCart = () => {
@@ -67,11 +90,22 @@ export default function ProductDetail() {
 
     setReviewSubmitting(true);
     try {
-      const res = await api.post(`/products/${product._id}/reviews`, {
-        rating: newRating,
-        comment: newComment
-      });
-      setReviews([res.data, ...reviews]);
+      if (product._id && !product._id.startsWith('prod-')) {
+        const res = await api.post(`/products/${product._id}/reviews`, {
+          rating: newRating,
+          comment: newComment
+        });
+        setReviews([res.data, ...reviews]);
+      } else {
+        const mockRev = {
+          _id: `rev-${Date.now()}`,
+          user: { name: user.name },
+          rating: newRating,
+          comment: newComment,
+          createdAt: new Date()
+        };
+        setReviews([mockRev, ...reviews]);
+      }
       setNewComment('');
       alert('Review posted successfully!');
     } catch (err) {

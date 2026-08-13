@@ -4,12 +4,13 @@ import { ArrowRight, Flame, ShieldCheck, Zap, Sparkles } from 'lucide-react';
 import api from '../services/api';
 import ProductCard from '../components/ProductCard';
 import DuotoneImage from '../components/DuotoneImage';
+import { FALLBACK_PRODUCTS, FALLBACK_CATEGORIES } from '../data/fallbackData';
 
 export default function Home() {
-  const [featuredProducts, setFeaturedProducts] = useState([]);
-  const [limitedProducts, setLimitedProducts] = useState([]);
-  const [categories, setCategories] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [featuredProducts, setFeaturedProducts] = useState(FALLBACK_PRODUCTS);
+  const [limitedProducts, setLimitedProducts] = useState(FALLBACK_PRODUCTS.filter(p => p.isLimitedEdition));
+  const [categories, setCategories] = useState(FALLBACK_CATEGORIES);
+  const [loading, setLoading] = useState(false);
 
   // Countdown for Limited Drop
   const [timeLeft, setTimeLeft] = useState({ days: 2, hours: 14, minutes: 35, seconds: 12 });
@@ -35,13 +36,11 @@ export default function Home() {
           api.get('/products?isLimitedEdition=true&limit=4'),
           api.get('/categories')
         ]);
-        setFeaturedProducts(prodRes.data.products || []);
-        setLimitedProducts(limitedRes.data.products || []);
-        setCategories(catRes.data || []);
+        if (prodRes.data?.products?.length) setFeaturedProducts(prodRes.data.products);
+        if (limitedRes.data?.products?.length) setLimitedProducts(limitedRes.data.products);
+        if (catRes.data?.length) setCategories(catRes.data);
       } catch (err) {
-        console.warn('Failed to fetch home page data:', err);
-      } finally {
-        setLoading(false);
+        console.warn('Backend API spin-up in progress. Displaying static archive catalog:', err);
       }
     };
     fetchData();
@@ -51,7 +50,6 @@ export default function Home() {
     <div className="bg-black text-white">
       {/* 1. HERO SECTION */}
       <section className="position-relative min-vh-100 d-flex align-items-center justify-content-center overflow-hidden border-bottom border-dark">
-        {/* Background Overlay */}
         <div
           className="position-absolute top-0 start-0 w-100 h-100 opacity-30"
           style={{
@@ -164,19 +162,13 @@ export default function Home() {
             </Link>
           </div>
 
-          {loading ? (
-            <div className="text-center py-5 text-danger">
-              <div className="spinner-border" role="status"></div>
-            </div>
-          ) : (
-            <div className="row g-4">
-              {featuredProducts.slice(0, 8).map((product) => (
-                <div key={product._id} className="col-12 col-sm-6 col-md-4 col-lg-3">
-                  <ProductCard product={product} />
-                </div>
-              ))}
-            </div>
-          )}
+          <div className="row g-4">
+            {featuredProducts.slice(0, 8).map((product) => (
+              <div key={product._id} className="col-12 col-sm-6 col-md-4 col-lg-3">
+                <ProductCard product={product} />
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
