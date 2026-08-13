@@ -12,16 +12,21 @@ const registerUser = async (req, res, next) => {
       return res.status(400).json({ message: 'Name, email, and password are required' });
     }
 
-    const userExists = await User.findOne({ email });
+    if (password.length < 6) {
+      return res.status(400).json({ message: 'Password must be at least 6 characters long' });
+    }
+
+    const normalizedEmail = email.toLowerCase().trim();
+    const userExists = await User.findOne({ email: normalizedEmail });
     if (userExists) {
       return res.status(400).json({ message: 'User already exists with this email' });
     }
 
     const user = await User.create({
-      name,
-      email,
+      name: name.trim(),
+      email: normalizedEmail,
       password,
-      phone: phone || '',
+      phone: phone ? phone.trim() : '',
       role: 'customer'
     });
 
@@ -58,7 +63,8 @@ const loginUser = async (req, res, next) => {
       return res.status(400).json({ message: 'Email and password are required' });
     }
 
-    const user = await User.findOne({ email });
+    const normalizedEmail = email.toLowerCase().trim();
+    const user = await User.findOne({ email: normalizedEmail });
     if (user && (await user.matchPassword(password))) {
       const accessToken = generateAccessToken(user._id, user.role);
       const refreshToken = generateRefreshToken(user._id);

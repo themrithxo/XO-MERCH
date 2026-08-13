@@ -19,6 +19,11 @@ export default function Register() {
     e.preventDefault();
     setError('');
 
+    if (password.length < 6) {
+      setError('Password must be at least 6 characters long');
+      return;
+    }
+
     if (password !== confirmPassword) {
       setError('Passwords do not match');
       return;
@@ -29,7 +34,7 @@ export default function Register() {
       await register(name, email, password, phone);
       navigate('/profile');
     } catch (err) {
-      setError(err.response?.data?.message || 'Registration failed');
+      setError(err.response?.data?.message || 'Registration failed. Please try again.');
     } finally {
       setSubmitting(false);
     }
