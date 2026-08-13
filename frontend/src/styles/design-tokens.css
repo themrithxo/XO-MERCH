@@ -1,0 +1,148 @@
+:root {
+  /* Brand Color Tokens */
+  --xo-bg-dark: #0a0a0a;
+  --xo-bg-card: #0d0d0d;
+  --xo-bg-elevated: #141414;
+  --xo-bg-hover: #1c1c1c;
+
+  --xo-crimson-deep: #8b0000;
+  --xo-crimson-accent: #c9184a;
+  --xo-crimson-glow: rgba(201, 24, 74, 0.4);
+  --xo-crimson-border: rgba(201, 24, 74, 0.25);
+
+  --xo-text-main: #e8e8e8;
+  --xo-text-muted: #8a8a8a;
+  --xo-text-bright: #ffffff;
+
+  --xo-border-dark: #222222;
+  --xo-border-crimson: #c9184a;
+
+  /* Typography Tokens */
+  --xo-font-heading: 'Orbitron', -apple-system, BlinkMacSystemFont, sans-serif;
+  --xo-font-body: 'Rajdhani', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* Layout & Edge Styling */
+  --xo-radius: 2px;
+  --xo-transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  --xo-glow-shadow: 0 0 15px var(--xo-crimson-glow);
+}
+
+/* Base Body Dark Styling */
+body {
+  background-color: var(--xo-bg-dark);
+  color: var(--xo-text-main);
+  font-family: var(--xo-font-body);
+  font-size: 1.05rem;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+/* Headings in Orbitron */
+h1, h2, h3, h4, h5, h6, .xo-font-heading {
+  font-family: var(--xo-font-heading);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--xo-text-bright);
+}
+
+/* Edge-Lit Container Cards */
+.xo-card {
+  background-color: var(--xo-bg-card);
+  border: 1px solid var(--xo-border-dark);
+  border-radius: var(--xo-radius);
+  transition: var(--xo-transition);
+}
+
+.xo-card:hover {
+  border-color: var(--xo-crimson-border);
+  box-shadow: var(--xo-glow-shadow);
+}
+
+/* Edge-Lit Buttons */
+.xo-btn-primary {
+  background-color: var(--xo-crimson-deep);
+  color: var(--xo-text-bright);
+  border: 1px solid var(--xo-crimson-accent);
+  border-radius: var(--xo-radius);
+  font-family: var(--xo-font-heading);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.75rem 1.75rem;
+  transition: var(--xo-transition);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.xo-btn-primary:hover {
+  background-color: var(--xo-crimson-accent);
+  box-shadow: 0 0 20px var(--xo-crimson-glow);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.xo-btn-outline {
+  background: transparent;
+  color: var(--xo-text-main);
+  border: 1px solid var(--xo-border-dark);
+  border-radius: var(--xo-radius);
+  font-family: var(--xo-font-heading);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.75rem 1.75rem;
+  transition: var(--xo-transition);
+}
+
+.xo-btn-outline:hover {
+  border-color: var(--xo-crimson-accent);
+  color: var(--xo-crimson-accent);
+  box-shadow: 0 0 12px var(--xo-crimson-glow);
+}
+
+/* Form Inputs */
+.xo-input {
+  background-color: var(--xo-bg-elevated);
+  border: 1px solid var(--xo-border-dark);
+  color: var(--xo-text-main);
+  border-radius: var(--xo-radius);
+  padding: 0.75rem 1rem;
+  font-family: var(--xo-font-body);
+  font-size: 1rem;
+  transition: var(--xo-transition);
+}
+
+.xo-input:focus {
+  outline: none;
+  background-color: #1a1a1a;
+  border-color: var(--xo-crimson-accent);
+  box-shadow: 0 0 10px var(--xo-crimson-glow);
+  color: var(--xo-text-bright);
+}
+
+/* Duotone image styling helper */
+.xo-duotone-img {
+  filter: url(#xo-gothic-duotone);
+  transition: filter 0.4s ease;
+}
+
+.xo-duotone-img:hover {
+  filter: none;
+}
+
+/* Badge styling */
+.xo-badge-limited {
+  background-color: var(--xo-crimson-deep);
+  color: #ffffff;
+  border: 1px solid var(--xo-crimson-accent);
+  font-family: var(--xo-font-heading);
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  padding: 0.25rem 0.6rem;
+  border-radius: var(--xo-radius);
+}

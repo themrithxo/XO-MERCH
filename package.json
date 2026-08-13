@@ -1,0 +1,26 @@
+{
+  "name": "xo-platform",
+  "version": "1.0.0",
+  "description": "XO — Luxury Gothic Streetwear Platform",
+  "main": "backend/server.js",
+  "scripts": {
+    "dev:backend": "cd backend && npm run dev",
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "seed": "cd backend && npm run seed",
+    "build:frontend": "cd frontend && npm run build",
+    "install:all": "npm install && cd backend && npm install && cd ../frontend && npm install"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "keywords": [
+    "gothic",
+    "streetwear",
+    "luxury",
+    "mern",
+    "ecommerce"
+  ],
+  "author": "XO Luxury Gothic",
+  "license": "MIT"
+}

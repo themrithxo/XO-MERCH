@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:6.0
+    container_name: xo_mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    environment:
+      MONGO_INITDB_DATABASE: xo_streetwear
+
+  backend:
+    build: ./backend
+    container_name: xo_backend
+    ports:
+      - "5000:5000"
+    environment:
+      - PORT=5000
+      - MONGO_URI=mongodb://mongodb:27017/xo_streetwear
+      - JWT_SECRET=xo_luxury_gothic_streetwear_jwt_secret_key_2026_super_secure
+      - JWT_REFRESH_SECRET=xo_luxury_gothic_streetwear_refresh_secret_key_2026_super_secure
+      - CLIENT_URL=http://localhost:5173
+      - NODE_ENV=development
+    depends_on:
+      - mongodb
+
+  frontend:
+    build: ./frontend
+    container_name: xo_frontend
+    ports:
+      - "5173:5173"
+    environment:
+      - VITE_API_URL=http://localhost:5000/api
+    depends_on:
+      - backend
+
+volumes:
+  mongo_data:

@@ -1,0 +1,69 @@
+@import 'bootstrap/dist/css/bootstrap.min.css';
+@import './design-tokens.css';
+
+/* Global Custom Overrides for Bootstrap in Gothic Theme */
+body {
+  background-color: var(--xo-bg-dark) !important;
+  color: var(--xo-text-main) !important;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--xo-bg-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #252525;
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--xo-crimson-deep);
+}
+
+/* Modal and Navbar Bootstrap Overrides */
+.modal-content {
+  background-color: var(--xo-bg-card);
+  border: 1px solid var(--xo-border-crimson);
+  color: var(--xo-text-main);
+  border-radius: var(--xo-radius);
+}
+
+.table-dark {
+  --bs-table-bg: var(--xo-bg-card);
+  --bs-table-border-color: var(--xo-border-dark);
+  color: var(--xo-text-main);
+}
+
+.dropdown-menu-dark {
+  background-color: var(--xo-bg-elevated);
+  border: 1px solid var(--xo-border-dark);
+}
+
+.dropdown-item {
+  color: var(--xo-text-main);
+  font-family: var(--xo-font-body);
+}
+
+.dropdown-item:hover {
+  background-color: var(--xo-crimson-deep);
+  color: #fff;
+}
+
+.nav-link {
+  color: var(--xo-text-main) !important;
+  font-family: var(--xo-font-heading);
+  letter-spacing: 0.1em;
+  font-size: 0.9rem;
+  transition: var(--xo-transition);
+}
+
+.nav-link:hover, .nav-link.active {
+  color: var(--xo-crimson-accent) !important;
+  text-shadow: 0 0 10px var(--xo-crimson-glow);
+}
